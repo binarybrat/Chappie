@@ -1,22 +1,9 @@
 from discord.ext import commands
-from cogs.helpers import config
 from cogs.helpers import point_system
 import traceback
 import discord
 import sys
-
-
-def get_prefix(bot, msg):
-    """A callable Prefix for our bot.
-    This could be edited to allow per server prefixes."""
-
-    prefixes = ['!']
-
-    if msg.guild.id is None:
-        return '?'
-
-    return commands.when_mentioned_or(*prefixes)(bot, msg)
-
+import json
 
 initial_extensions = ('cogs.admin',
                       'cogs.scraping',
@@ -27,14 +14,11 @@ initial_extensions = ('cogs.admin',
                       'cogs.userinfo',
                       'cogs.serverinfo')
 
-bot = commands.Bot(
-    command_prefix=get_prefix,
-    description='''You've asked for help! Here are a list of the commands available to you.''')
+bot = commands.Bot(command_prefix='!')
 
 
 @bot.event
 async def on_ready():
-
     print(
         f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
 
@@ -54,6 +38,7 @@ async def on_ready():
                 traceback.print_exc()
     print(f'Successfully logged in and booted...!')
 
+
 @bot.listen()
 async def on_message(message: discord.Message):
     if not message.author.bot:
@@ -66,5 +51,8 @@ async def on_message(message: discord.Message):
         print(points)
         pt.update_table(message, points)
 
+with open("cogs/helpers/config.json", "r", encoding="utf8") as fp:
+    config = json.load(fp)
+    token = config["test_token"]
 
-bot.run(config.tst_token, bot=True, reconnect=True)
+bot.run(token, bot=True, reconnect=True)
