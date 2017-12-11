@@ -1,5 +1,4 @@
 from discord.ext import commands
-from cogs.helpers import config
 from cogs.helpers import utils
 import discord
 import asyncio
@@ -17,43 +16,6 @@ class Members:
 
     def check_approved_server(ctx):
         return ctx.guild.name == "Health Anxiety Community"
-
-    @commands.command()
-    @commands.guild_only()
-    @commands.check(check_approved_server)
-    async def meme(self, ctx):
-        """Sends a meme to the channel"""
-        media_to_use = random.choice(config.memlist)
-        await ctx.channel.send(file=discord.File(fp=img_path + media_to_use))
-
-    @commands.command()
-    @commands.guild_only()
-    async def hug(self, ctx):
-        """Sends a hug to the channel"""
-        media_to_use = random.choice(config.huglist)
-        await ctx.channel.send(file=discord.File(fp=img_path + media_to_use))
-
-    @commands.command()
-    @commands.guild_only()
-    @commands.check(check_approved_server)
-    async def breathe(self, ctx):
-        """Sends a breathing gif to the channel"""
-        media_to_use = random.choice(config.breathelist)
-        await ctx.channel.send(file=discord.File(fp=img_path + media_to_use))
-
-    @commands.command()
-    @commands.guild_only()
-    async def happybday(self, ctx):
-        """Sends a happy birthday message to the channel"""
-        media_to_use = random.choice(config.bdaylist)
-        await ctx.channel.send(file=discord.File(fp=img_path + media_to_use))
-
-    @commands.command()
-    @commands.guild_only()
-    async def congrats(self, ctx):
-        """Sends a congrats message to the channel"""
-        media_to_use = random.choice(config.congratslist)
-        await ctx.channel.send(file=discord.File(fp=img_path + media_to_use))
 
     @commands.command()
     @commands.guild_only()
