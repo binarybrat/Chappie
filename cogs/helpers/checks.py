@@ -4,7 +4,6 @@ import git
 import discord
 import os
 import aiohttp
-#from cogs.utils.dataIO import dataIO
 from urllib.parse import quote as uriquote
 
 try:
@@ -12,7 +11,6 @@ try:
 except ImportError:
     from bs4 import BeautifulSoup
 from urllib.parse import parse_qs, quote_plus
-#from cogs.utils import common
 
 
 # @common.deprecation_warn()
@@ -58,18 +56,6 @@ def set_status(bot):
         return discord.Status.dnd
     else:
         return discord.Status.invisible
-
-
-#def user_post(key_users, user):
-    #if time.time() - float(key_users[user][0]) < float(key_users[user][1]):
-        #return False, [time.time(), key_users[user][1]]
-    #else:
-        #log = dataIO.load_json("settings/log.json")
-        #now = time.time()
-        #log["keyusers"][user] = [now, key_users[user][1]]
-        #dataIO.save_json("settings/log.json", log)
-        #return True, [now, key_users[user][1]]
-
 
 def gc_clear(gc_time):
     if time.time() - 3600.0 < gc_time:
