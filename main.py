@@ -45,6 +45,6 @@ async def on_message(message: discord.Message):
 
 with open("cogs/helpers/config.json", "r", encoding="utf8") as fp:
     config = json.load(fp)
-    token = config["test_token"]
+    token = config["token"]
 
 bot.run(token, bot=True, reconnect=True)
