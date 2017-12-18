@@ -83,6 +83,28 @@ class Admin:
         em.set_thumbnail(url=avi)
         await ctx.send(embed=em)
 
+    @commands.command(hidden=True)
+    @commands.guild_only()
+    async def collect_messages(self, ctx):
+        d = {}
+        guild = ctx.guild
+        for channel in guild.text_channels:
+            async for message in channel.history():
+                key = str(message.author)
+                if not key in d:
+                    value = 1
+                    d[key] = value
+                else:
+                    value = d[key]
+                    d[key] = value + 1
+        file = open('textfile.txt', 'w')
+        for k, v in d.items():
+            file.write(k + ': ' + str(v) + '\n')
+            print(k + ': ' + str(v))
+        file.close()
+
+
+
 
 def setup(bot):
     bot.add_cog(Admin(bot))
