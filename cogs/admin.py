@@ -70,10 +70,7 @@ class Admin:
 
     @commands.command(hidden=True)
     @commands.guild_only()
-    async def top5(self, ctx, name=""):
-
-
-
+    async def top5(self, ctx):
         pt = point_system
 
         top = pt.get_top_5(ctx.guild)
