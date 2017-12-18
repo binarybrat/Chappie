@@ -12,8 +12,7 @@ initial_extensions = ('cogs.admin',
                       'cogs.poll',
                       'cogs.help',
                       'cogs.userinfo',
-                      'cogs.serverinfo',
-                      'cogs.spotify')
+                      'cogs.serverinfo')
 
 bot = commands.Bot(command_prefix='!')
 
