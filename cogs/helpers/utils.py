@@ -6,7 +6,6 @@ thingsToSay = ['What?', 'That\'s me', 'Hello!',
                'That\'s my name, don\'t wear it out']
 
 rank = ['Level 1: Server Newbie', 'Level 2: Server Apprentice', 'Level 3: Server Helper', 'Level 4: Server Contributor', 'Level 5: Server Legend']
-ranks = {'Level: 1': 100, 'Level: 2': 250, 'Level: 3': 500, 'Level: 4': 1000, 'Level: 5': 2500}
 
 
 async def findChannelObject(guild, channel_name):
