@@ -102,3 +102,4 @@ ENV/
 cogs/helpers/config.py
 cogs/helpers/config.json
 *.db
+*.txt
