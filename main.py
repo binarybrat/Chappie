@@ -1,5 +1,5 @@
 from discord.ext import commands
-from cogs.helpers import point_system
+from cogs.helpers.utils import point_system_check
 import traceback
 import discord
 import sys
@@ -12,7 +12,8 @@ initial_extensions = ('cogs.admin',
                       'cogs.poll',
                       'cogs.help',
                       'cogs.userinfo',
-                      'cogs.serverinfo')
+                      'cogs.serverinfo',
+                      'cogs.spotify')
 
 bot = commands.Bot(command_prefix='!')
 
@@ -41,15 +42,7 @@ async def on_ready():
 
 @bot.listen()
 async def on_message(message: discord.Message):
-    if not message.author.bot:
-        pt = point_system
-        if not pt.check_if_user_in_table(message):
-            pt.insert_user_in_table(message)
-        que = pt.query_points(message)
-        points = que[0].num_points
-        points += 1
-        print(points)
-        pt.update_table(message, points)
+    await point_system_check(message)
 
 with open("cogs/helpers/config.json", "r", encoding="utf8") as fp:
     config = json.load(fp)
