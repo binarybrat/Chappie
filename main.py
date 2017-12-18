@@ -24,7 +24,7 @@ async def on_ready():
 
     # Changes our bots Playing Status. type=1(streaming) for a standard game
     # you could remove type and url.
-    await bot.change_presence(game=discord.Game(name='with your dog'))
+    await bot.change_presence(game=discord.Game(name='Euro Farm Simulator 2017'))
 
     # Here we load our extensions listed above in [initial_extensions].
     if __name__ == '__main__':
