@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 cogs/helpers/config.py
 cogs/helpers/config.json
+*.db
