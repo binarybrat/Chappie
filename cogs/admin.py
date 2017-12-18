@@ -89,21 +89,18 @@ class Admin:
         d = {}
         guild = ctx.guild
         for channel in guild.text_channels:
-            async for message in channel.history():
-                key = str(message.author)
-                if not key in d:
-                    value = 1
-                    d[key] = value
-                else:
-                    value = d[key]
-                    d[key] = value + 1
-        file = open('textfile.txt', 'w')
-        for k, v in d.items():
-            file.write(k + ': ' + str(v) + '\n')
-            print(k + ': ' + str(v))
-        file.close()
-
-
+            async for message in channel.history(limit=100000):
+                if not message.author.bot:
+                    key = str(message.author)
+                    if not key in d:
+                        value = 1
+                        d[key] = value
+                    else:
+                        value = d[key]
+                        d[key] = value + 1
+        with open('collecting.txt', 'w') as file:
+            for k, v in d.items():
+                print(f'{k} : {v}\n', file=file)
 
 
 def setup(bot):
