@@ -56,3 +56,28 @@ def update_table(msg_obj, points):
     session.execute(update_submission)
     session.commit()
     session.close()
+
+
+def insert_user_in_table_new_MSG(key, points, guild):
+    new_submission = Points(username=str(key), num_points=points, server_name=str(guild.name),
+                            server_id=int(guild.id))
+    session.add(new_submission)
+    session.commit()
+    session.close()
+
+def check_if_user_in_table_new_MSG(key, guild):
+    session = DBSession()
+    if session.query(Points).filter(Points.username == key,
+                                    Points.server_id == int(guild.id)).all():
+        return True
+    else:
+        return False
+
+def update_table_new_MSG(key, points, guild):
+    update_submission = update(Points). \
+        where(and_(Points.username == key, Points.server_id == int(guild.id))).values(
+        num_points=points)
+    session.execute(update_submission)
+    session.commit()
+    session.close()
+
