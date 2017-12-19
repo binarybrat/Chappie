@@ -86,6 +86,7 @@ class Admin:
     @commands.command(hidden=True)
     @commands.guild_only()
     async def collect_messages(self, ctx):
+        print('Counting messages from all channels...')
         d = {}
         guild = ctx.guild
         for channel in guild.text_channels:
@@ -98,9 +99,16 @@ class Admin:
                     else:
                         value = d[key]
                         d[key] = value + 1
-        with open('collecting.txt', 'w') as file:
-            for k, v in d.items():
-                print(f'{k} : {v}\n', file=file)
+        print('Counting all messages were successful...')
+        for k, v in d.items():
+            pt = point_system
+            if not pt.check_if_user_in_table_new_MSG(k, guild):
+                pt.insert_user_in_table_new_MSG(k, v, guild)
+            else:
+                pt.update_table_new_MSG(k, v, guild)
+        print('All points have been updated in the database...')
+
+
 
 
 def setup(bot):
