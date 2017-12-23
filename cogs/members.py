@@ -1,13 +1,7 @@
 from discord.ext import commands
-from cogs.helpers import utils
+from .helpers.checks import find_channel, find_role, embed_perms
+from .helpers import point_system
 import discord
-import asyncio
-import sqlite3
-import random
-import sys
-import os
-script_dir = sys.path[0]
-img_path = os.path.join(script_dir, 'cogs/helpers/media/')
 
 
 class Members:
@@ -15,26 +9,39 @@ class Members:
         self.bot = bot
 
     def check_approved_server(ctx):
-        return ctx.guild.name == "Health Anxiety Community"
+        return ctx.guild.name == "Testing Server"
 
     @commands.command()
-    @commands.guild_only()
     @commands.check(check_approved_server)
     async def panic(self, ctx):
         """Panic attack command to alert others."""
-        guild = ctx.guild
-        channel = await utils.findChannelObject(guild, 'support-panic-attacks')
-        role = await utils.findRoleObject(guild, '@everyone')
+
+        channel = find_channel(ctx.guild.text_channels, 'support-panic-attacks')
+        role = find_role(ctx.guild.roles, '@everyone')
 
         await ctx.guild.get_channel(channel.id).set_permissions(role, send_messages=True)
 
-        msg1 = 'Hello ' + ctx.author.mention + ', I see you\'re having a panic attack. Please move to our ' + \
-            channel.mention + ' where we can better assist you.'
-        msg2 = 'Is anyone @here available to assist {0.author.mention}.'.format(
-            ctx)
+        msg1 = 'Hello {0.author.mention}, I see you\'re having a panic attack. ' \
+               'Please move to our {1.mention} where we can better assist you.'.format(ctx, channel)
+        msg2 = 'Is anyone @here available to assist {0.author.mention}.'.format(ctx)
 
         await ctx.channel.send(msg1)
         await ctx.guild.get_channel(channel.id).send(msg2)
+
+    @commands.command()
+    async def top5(self, ctx):
+        """Gets the top 5 ranked people in the server."""
+
+        pt = point_system
+        top = pt.get_top_5(ctx.guild)
+        em = discord.Embed(timestamp=ctx.message.created_at, colour=0x708DD0)
+        avi = 'http://www.humanengineers.com/wp-content/uploads/2017/09/tog.png'
+        for user in top:
+            if embed_perms(ctx.message):
+                em.add_field(name='User ID', value=user.username, inline=True)
+                em.add_field(name='Points', value=user.num_points, inline=True)
+        em.set_thumbnail(url=avi)
+        await ctx.send(embed=em)
 
 
 def setup(bot):

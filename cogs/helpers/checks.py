@@ -41,5 +41,17 @@ def find_channel(channel_list, text):
         found_channel = discord.utils.get(channel_list, name=text)
     return found_channel
 
+
+def find_role(role_list, text):
+    if text.isdigit():
+        found_channel = discord.utils.get(role_list, id=int(text))
+    elif text.startswith("<#") and text.endswith(">"):
+        found_channel = discord.utils.get(role_list,
+                                          id=text.replace("<", "").replace(">", "").replace("#", ""))
+    else:
+        found_channel = discord.utils.get(role_list, name=text)
+    return found_channel
+
+
 def attach_perms(message):
     return message.author.permissions_in(message.channel).attach_files

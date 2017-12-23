@@ -106,14 +106,14 @@ class Music:
     @commands.command()
     @commands.guild_only()
     async def disconnect(self, ctx):
-        """Stops and disconnects the bot from voice"""
+        """Disconnects the bot from voice"""
 
         await ctx.voice_client.disconnect()
 
     @commands.command()
     @commands.guild_only()
     async def stop(self, ctx):
-        """Stops and disconnects the bot from voice"""
+        """Stops the bot from voice"""
 
         ctx.voice_client.stop()
 
