@@ -1,24 +1,3 @@
-"""Overrides the built-in help formatter.
-All help messages will be embed and pretty.
-Most of the code stolen from
-discord.ext.commands.formatter.py and
-converted into embeds instead of codeblocks.
-Docstr on cog class becomes category.
-Docstr on command definition becomes command
-summary and usage.
-Use [p] in command docstr for bot prefix.
-See [p]help here for example.
-await bot.formatter.format_help_for(ctx, command)
-to send help page for command. Optionally pass a
-string as third arg to add a more descriptive
-message to help page.
-e.g. format_help_for(ctx, ctx.command, "Missing required arguments")
-discord.py 1.0.0a
-Experimental: compatibility with 0.16.8
-Copyrights to logic of code belong to Rapptz (Danny)
-Everything else credit to SirThane#1780
-Pagination added by appu1232"""
-
 import discord
 from discord.ext import commands
 from discord.ext.commands import formatter
