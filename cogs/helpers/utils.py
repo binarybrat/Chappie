@@ -1,6 +1,7 @@
 import sqlite3
 import random
 from . import point_system
+from .checks import find_role
 
 rank = ['Level 1: Server Newbie',
         'Level 2: Server Apprentice',
@@ -22,7 +23,7 @@ async def point_system_check(message):
 
         if 100 < points <= 249:
 
-            role1 = await findRoleObject(guild, rank[0])
+            role1 = find_role(guild.roles, rank[0])
             if not role1 in message.author.roles:
                 msg = 'Congrats {1.author.mention}, you have achieved {0.name}! The more you contribute to any server chat the more XP you get :). You will have to gain 150 more XP to gain another level! :robot:'
                 await message.author.add_roles(role1)
@@ -30,8 +31,8 @@ async def point_system_check(message):
 
         elif 250 <= points <= 499:
 
-            role1 = await findRoleObject(guild, rank[1])
-            role2 = await findRoleObject(guild, rank[1 - 1])
+            role1 = find_role(guild.roles, rank[1])
+            role2 = find_role(guild.roles, rank[1 - 1])
             if not role1 in message.author.roles:
                 msg = 'Congrats {1.author.mention}, you have achieved {0.name}! The more you contribute to any server chat the more XP you get :). You will have to gain 250 more XP to gain another level! :robot:'
                 await message.author.remove_roles(role2)
@@ -40,8 +41,8 @@ async def point_system_check(message):
 
         elif 500 <= points <= 999:
 
-            role1 = await findRoleObject(guild, rank[2])
-            role2 = await findRoleObject(guild, rank[2 - 1])
+            role1 = find_role(guild.roles, rank[2])
+            role2 = find_role(guild.roles, rank[2 - 1])
             if not role1 in message.author.roles:
                 msg = 'Congrats {1.author.mention}, you have achieved {0.name}! The more you contribute to any server chat the more XP you get :). You will have to gain 750 more XP to gain another level! :robot:'
                 await message.author.remove_roles(role2)
@@ -50,8 +51,8 @@ async def point_system_check(message):
 
         elif 1000 <= points <= 2499:
 
-            role1 = await findRoleObject(guild, rank[3])
-            role2 = await findRoleObject(guild, rank[3 - 1])
+            role1 = find_role(guild.roles, rank[3])
+            role2 = find_role(guild.roles, rank[3 - 1])
             if not role1 in message.author.roles:
                 msg = 'Congrats {1.author.mention}, you have achieved {0.name}! The more you contribute to any server chat the more XP you get :). You will have to gain 1500 more XP to gain another level! :robot:'
                 await message.author.remove_roles(role2)
@@ -60,8 +61,8 @@ async def point_system_check(message):
 
         elif 2500 <= points:
 
-            role1 = await findRoleObject(guild, rank[4])
-            role2 = await findRoleObject(guild, rank[4 - 1])
+            role1 = find_role(guild.roles, rank[4])
+            role2 = find_role(guild.roles, rank[4 - 1])
             if not role1 in message.author.roles:
                 msg = 'Congrats {1.author.mention}, you have achieved {0.name}! The more you contribute to any server chat the more XP you get :). You have reached maximum level! :robot:'
                 await message.author.remove_roles(role2)
