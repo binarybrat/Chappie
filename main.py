@@ -12,7 +12,8 @@ initial_extensions = ('cogs.admin',
                       'cogs.poll',
                       'cogs.help',
                       'cogs.userinfo',
-                      'cogs.serverinfo')
+                      'cogs.serverinfo',
+                      'cogs.fun')
 
 bot = commands.Bot(command_prefix='!')
 
