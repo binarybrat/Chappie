@@ -10,7 +10,7 @@ class Members:
         self.bot = bot
 
     def check_approved_server(ctx):
-        return ctx.guild.name == "Testing Server"
+        return ctx.guild.name == "Health Anxiety Community"
 
     @commands.command()
     @commands.check(check_approved_server)
