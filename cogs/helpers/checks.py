@@ -1,10 +1,4 @@
-import json
-import time
-import git
 import discord
-import os
-import aiohttp
-from urllib.parse import quote as uriquote
 
 
 def embed_perms(message):
