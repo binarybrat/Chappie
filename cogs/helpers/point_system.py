@@ -41,7 +41,6 @@ def query_points(msg_obj):
 
 
 def check_if_user_in_table(msg_obj):
-    session = DBSession()
     if session.query(Points).filter(Points.username == str(msg_obj.author),
                                     Points.server_id == int(msg_obj.guild.id)).all():
         return True
