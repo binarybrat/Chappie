@@ -15,8 +15,7 @@ class Admin:
             await ctx.author.send(
                 'ON_COMMAND_ERROR, Sorry either you don\'t have permission for command or something went wrong.')
 
-    @classmethod
-    async def check_if_is_panic_channel(cls, ctx):
+    async def check_if_is_panic_channel(ctx):
         guild = ctx.guild
         channel = find_channel(guild.channels, 'support-panic-attacks')
         return ctx.message.channel.id == channel.id
