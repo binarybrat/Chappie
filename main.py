@@ -10,7 +10,6 @@ initial_extensions = ('cogs.admin',
                       'cogs.music',
                       'cogs.members',
                       'cogs.poll',
-                      'cogs.help',
                       'cogs.userinfo',
                       'cogs.serverinfo',
                       'cogs.fun')
