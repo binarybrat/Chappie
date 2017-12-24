@@ -313,7 +313,7 @@ class Help(formatter.HelpFormatter):
                                   color=color, author=self.author)
         return embed
 
-    @commands.command(name='help', pass_context=True)
+    @commands.command(name='help', pass_context=True, hidden=True)
     async def help(self, ctx, *cmds: str):
         if not ctx.message.author.permissions_in(ctx.channel).embed_links:
             return await ctx.send(content=self.bot.bot_prefix + "You don't have permissions to send embeds here. Find a different server/channel where you can embed links and try the help command there.")
