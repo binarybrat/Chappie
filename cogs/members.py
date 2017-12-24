@@ -1,7 +1,8 @@
 from discord.ext import commands
-from .helpers.checks import find_channel, find_role, embed_perms
+from .helpers.checks import find_channel, find_role, embed_perms, get_user
 from .helpers import point_system
 import discord
+from random import *
 
 
 class Members:
